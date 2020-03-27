@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{E2B063AF-9983-46ED-868B-9A6E299C1036}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Dll\NVBrowserDll.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="SubProcess\NVCoreBrowser.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="AppTest\TestApp.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="NVBrowserDll">
+        <MSBuild Projects="Dll\NVBrowserDll.dproj"/>
+    </Target>
+    <Target Name="NVBrowserDll:Clean">
+        <MSBuild Projects="Dll\NVBrowserDll.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="NVBrowserDll:Make">
+        <MSBuild Projects="Dll\NVBrowserDll.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="NVCoreBrowser">
+        <MSBuild Projects="SubProcess\NVCoreBrowser.dproj"/>
+    </Target>
+    <Target Name="NVCoreBrowser:Clean">
+        <MSBuild Projects="SubProcess\NVCoreBrowser.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="NVCoreBrowser:Make">
+        <MSBuild Projects="SubProcess\NVCoreBrowser.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TestApp">
+        <MSBuild Projects="AppTest\TestApp.dproj"/>
+    </Target>
+    <Target Name="TestApp:Clean">
+        <MSBuild Projects="AppTest\TestApp.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TestApp:Make">
+        <MSBuild Projects="AppTest\TestApp.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="NVBrowserDll;NVCoreBrowser;TestApp"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="NVBrowserDll:Clean;NVCoreBrowser:Clean;TestApp:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="NVBrowserDll:Make;NVCoreBrowser:Make;TestApp:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
